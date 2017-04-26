@@ -8,7 +8,7 @@ import os
 
 # Parsing command-line args
 parser = argparse.ArgumentParser(description='Tweet crawler')
-parser.add_argument('-nort', action="store_true", dest="nort", default=False, help='disable retweets', required=True)
+parser.add_argument('-nort', action="store_true", dest="nort", default=False, help='disable retweets')
 parser.add_argument('-htags', action="store", dest="htags", nargs='*', help='hashtags to query', required=True)
 parser.add_argument('-c', action="store", dest="count", type=int, help='tweets count to query', required=True)
 args = parser.parse_args()
@@ -19,6 +19,7 @@ TWITTER_API_KEY = os.environ['TWITTER_API_KEY']
 TWITTER_API_KEY_SECRET = os.environ['TWITTER_API_KEY_SECRET']
 TWITTER_ACCESS_TOKEN = os.environ['TWITTER_ACCESS_TOKEN']
 TWITTER_ACCESS_TOKEN_SECRET = os.environ['TWITTER_ACCESS_TOKEN_SECRET']
+
 
 t = Twython(app_key=TWITTER_API_KEY, 
             app_secret=TWITTER_API_KEY_SECRET, 
