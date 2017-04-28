@@ -5,6 +5,9 @@ from twython import Twython
 import argparse
 import os
 
+from pymongo import MongoClient
+import json
+
 
 # Parsing command-line args
 parser = argparse.ArgumentParser(description='Tweet crawler')
@@ -27,24 +30,53 @@ t = Twython(app_key=TWITTER_API_KEY,
             oauth_token_secret=TWITTER_ACCESS_TOKEN_SECRET)
 
 
+mongoCLient = MongoClient('mongodb://localhost:27017/')
+db = mongoCLient['msi_crawler']
+collection = db['msi_sp']
+
 # Creating query from command-line args
 query = ""
 for htag in args.htags:
     if query == "":
         query += "#" + htag
     else:
-        query += "+#" + htag
+        query += " OR #" + htag
 
 if args.nort:
     query += "-filter:retweets"
 
+print 'query:', query
+
+with open('since_id.dat', 'r') as f_read:
+    since_id = f_read.readline()
 
 # Searching
-search = t.search(q=query, count=args.count)
+if (since_id == ''):
+    search = t.search(q=query, count=args.count)
+else:
+    search = t.search(q=query, count=args.count, since_id=since_id)
 
 tweets = search['statuses']
 
+tweet_docs = []
 
-# Printing results
+# Inserting mongo
 for tweet in tweets:
-  print tweet['id_str'], '\n', tweet['text'].encode('utf-8'), '\n\n\n'
+
+    tweet_doc = {
+        'tweet_id': tweet['id_str'],
+        'text': tweet['text'].encode('utf-8'),
+        'date': tweet['created_at'],
+        'rt': tweet['retweeted']
+    }
+
+    tweet_docs.append(tweet_doc)
+
+    if tweet_doc['tweet_id'] > since_id:
+        since_id = tweet_doc['tweet_id']
+
+collection.insert_many(tweet_docs)
+print 'Found {0} new tweets'.format(len(tweet_docs))
+
+with open('since_id.dat', 'w') as f_write:
+    f_write.write(since_id)
