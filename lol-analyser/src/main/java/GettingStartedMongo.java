@@ -30,7 +30,7 @@ public final class GettingStartedMongo
         /*End Example**************************************************/
 
         // Analyze data from MongoDB
-        System.out.println(rdd.count());
+//        System.out.println(rdd.count());
         System.out.println(rdd.first().toJson());
 
         TimeUnit.SECONDS.sleep(1000);
