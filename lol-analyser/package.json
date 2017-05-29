@@ -1,0 +1,34 @@
+{
+  "name": "diretodafont",
+  "private": true,
+  "version": "0.0.0",
+  "description": "An internship and cientific iniciation offer web site.",
+  "repository": "https://github.com/ericreis/big-data.git",
+  "devDependencies": {
+    "typescript": "^2.0.3",
+    "bower": "^1.7.9",
+    "typings": "^1.4.0",
+    "http-server": "^0.9.0",
+    "karma": "~1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-junit-reporter": "^1.1.0",
+    "protractor": "~4.0.9",
+    "shelljs": "^0.7.4"
+  },
+  "scripts": {
+    "postinstall": "bower install && typings install",
+    "prestart": "npm install",
+    "start": "http-server src/main/webapp -a localhost -p 8000",
+    "test": "karma start src/test/javascript/karma.conf.js",
+    "test-single-run": "karma start src/test/javascript/karma.conf.js  --single-run",
+    "preupdate-webdriver": "npm install",
+    "update-webdriver": "webdriver-manager update",
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "protractor src/test/javascript/protractor.conf.js",
+    "update-index-async": "node -e \"require('shelljs/global'); sed('-i', /\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/, '//@@NG_LOADER_START@@\\n' + cat('src/main/webapp/vendor/angular-loader/angular-loader.min.js') + '\\n//@@NG_LOADER_END@@', 'src/main/webapp/index.html');\""
+  },
+  "author": "Eric Reis Figueiredo",
+  "license": "MIT"
+}

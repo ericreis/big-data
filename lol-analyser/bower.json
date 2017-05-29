@@ -1,0 +1,43 @@
+{
+  "name": "bidata",
+  "authors": [
+    "Eric Reis Figueiredo <eric_reisfig@poli.ufrj.br>"
+  ],
+  "description": "web site for big-data course project.",
+  "main": "src/main/webapp/index.html",
+  "keywords": [
+    "java",
+    "maven",
+    "angularjs",
+    "offer"
+  ],
+  "license": "MIT",
+  "homepage": "bigu.tech",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/main/webapp/content",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.4",
+    "angular-animate": "^1.5.8",
+    "angular-loader": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "angular": "^1.5.8",
+    "angular-mocks": "^1.5.8",
+    "angular-bootstrap": "^2.2.0",
+    "angular-toastr": "^2.1.1",
+    "angular-sanitize": "^1.5.8",
+    "angular-messages": "^1.5.8",
+    "ngstorage": "^0.3.11",
+    "bootstrap": "^3.3.7",
+    "admin-lte": "^2.3.8",
+    "devextreme": "17.1.3",
+    "bootstrap-datepicker": "^1.6.4",
+    "moment": "^2.16.0"
+  }
+}

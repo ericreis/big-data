@@ -1,0 +1,7 @@
+<!--<button ng-if="showExportBtn" class="btn btn-info" ng-click="dataGridCtrl.exportDataToCsv()" ng-csv="dataGridCtrl.exportDataToCsv()" csv-header="dataGridCtrl.getCsvHeader()" add-bom="true">Download</button>-->
+<div>
+    <div id="{{staDxGridCtrl.gridId}}" dx-data-grid="staDxGridCtrl.gridFieldOptions"></div>
+    <div ng-if="!staDxGridCtrl.hideTotal" class="nova-grid-total-count">
+        <span class="nova-grid-span-total-count">Total: {{staDxGridCtrl.total}}</span>
+    </div>.
+</div>

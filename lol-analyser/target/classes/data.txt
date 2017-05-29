@@ -1,1 +1,0 @@
-Teste para o programa de WordCount de Apache Spark.

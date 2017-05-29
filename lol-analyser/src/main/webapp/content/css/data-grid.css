@@ -1,0 +1,24 @@
+.nova-grid-total-count {
+    font-weight: normal;
+    font-size: 14px;
+    /*font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Verdana, san-serif;*/
+    line-height: normal;
+    height: 36px;
+    width: 300px;
+    margin-top: 2px;
+    position: relative;
+    /*left: 105px;*/
+}
+
+.nova-grid-span-total-count {
+    background-color: #e2e2e2;
+    padding: 8px;
+    color: black;
+    margin-left: 1px;
+    position: relative;
+    top: 8px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}

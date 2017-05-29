@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <title>Template App</title>
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/angular-bootstrap/ui-bootstrap-csp.css">
+    <link rel="stylesheet" href="vendor/angular-toastr/dist/angular-toastr.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="vendor/admin-lte/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="vendor/admin-lte/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="vendor/devextreme/css/dx.common.css">
+    <link rel="stylesheet" href="vendor/devextreme/css/dx.light.css">
+    <link rel="stylesheet" href="vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="content/css/data-grid.css">
+    <link rel="stylesheet" href="content/css/style.css">
+</head>
+<body class="sidebar-mini skin-blue">
+
+<div class="wrapper">
+
+    <header class="main-header">
+
+        <!-- Logo -->
+        <a href="javascript:void(0)" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>MSI</b></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg">Spark <b>MSI</b></span>
+        </a>
+
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="javascript:void(0)" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+        </nav>
+
+    </header>
+
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- /.search form -->
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu">
+                <li class="header">MENU PRINCIPAL</li>
+                <li>
+                    <a href="#/">
+                        <i class="fa fa-home"></i> <span>Home</span>
+                        <!--<span class="pull-right-container">-->
+                        <!--<small class="label pull-right bg-green">new</small>-->
+                        <!--</span>-->
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <div class="content-wrapper" style="min-height: 1126px;">
+
+        <ng-view autoscroll="true"></ng-view>
+
+    </div>
+
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 1.0.0
+        </div>
+        <strong>Copyright © 2016 <a href="http://ufrj.br">Universidade Federal do Rio de Janeiro - UFRJ</a>.</strong> All rights reserved.
+    </footer>
+
+</div>
+
+<!-- jquery -->
+<script src="vendor/jquery/dist/jquery.min.js"></script>
+
+<!-- bootstrap -->
+<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- angular js -->
+<script src="vendor/angular/angular.min.js"></script>
+<script src="vendor/angular-loader/angular-loader.min.js"></script>
+<script src="vendor/angular-mocks/angular-mocks.js"></script>
+<script src="vendor/angular-route/angular-route.min.js"></script>
+<script src="vendor/angular-animate/angular-animate.min.js"></script>
+<script src="vendor/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="vendor/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+<script src="vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="vendor/angular-messages/angular-messages.min.js"></script>
+
+<!-- globalize -->
+<!--<script src="vendor/globalize/dist/globalize.js"></script>-->
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
+
+<!-- angular storage -->
+<script src="vendor/ngstorage/ngStorage.min.js"></script>
+
+<!-- admin lte -->
+<script src="vendor/admin-lte/dist/js/app.min.js"></script>
+
+<!-- jszip -->
+<script src="vendor/jszip/dist/jszip.min.js"></script>
+
+<!-- dev extreme -->
+<script src="vendor/devextreme/js/dx.all.js"></script>
+
+<!-- moment -->
+<script src="vendor/moment/min/moment.min.js"></script>
+
+<!-- bootstrap datepicker -->
+<script src="vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+
+<!-- app global config -->
+<script src="public/app/config/app-specific.config.js"></script>
+
+<!-- app config -->
+<script src="public/app/config/app.module.js"></script>
+<script src="public/app/config/app.config.js"></script>
+
+<!-- data services base -->
+<script src="public/app/services/http/base/http.service.js"></script>
+
+<!-- util services -->
+<script src="public/app/services/util/log.service.js"></script>
+
+<!-- data services -->
+<script src="public/app/services/http/jobs.data-service.js"></script>
+
+<!-- components base -->
+<script src="public/app/components/base.controller.js"></script>
+
+<!-- components -->
+<script src="public/app/components/home/home.controller.js"></script>
+
+
+
+<!-- directives -->
+<script src="public/app/directives/sta-dx-grid/sta-dx-grid.controller.js"></script>
+<script src="public/app/directives/sta-dx-grid/sta-dx-grid.directive.js"></script>
+
+<script src="public/app/directives/sta-date-picker/sta-date-picker.controller.js"></script>
+<script src="public/app/directives/sta-date-picker/sta-date-picker.directive.js"></script>
+
+
+</body>
+</html>

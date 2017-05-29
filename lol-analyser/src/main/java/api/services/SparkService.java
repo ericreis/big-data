@@ -2,7 +2,9 @@ package api.services;
 
 import com.mongodb.spark.MongoSpark;
 import com.mongodb.spark.rdd.api.java.JavaMongoRDD;
+import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.function.Function;
 import org.apache.spark.sql.SparkSession;
 import org.bson.Document;
 import org.springframework.stereotype.Service;
@@ -44,5 +46,13 @@ public class SparkService
         JavaMongoRDD<Document> rdd = MongoSpark.load(jsc);
 
         return rdd.first();
+    }
+
+    public Document search(String text)
+    {
+        JavaMongoRDD<Document> rdd = MongoSpark.load(jsc);
+        JavaRDD<Document> filteredRdd = rdd.filter((Function<Document, Boolean>) document -> document.get("tweet_id").equals(text));
+
+        return filteredRdd.first();
     }
 }
