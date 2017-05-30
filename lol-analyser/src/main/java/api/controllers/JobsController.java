@@ -1,11 +1,15 @@
 package api.controllers;
 
+import api.models.SearchResult;
 import api.services.SparkService;
 import org.bson.Document;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import scala.Tuple2;
+
+import java.util.List;
 
 /**
  * Created by ericreis on 5/25/17.
@@ -40,8 +44,16 @@ public class JobsController
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public Document search(@RequestParam("text") String text)
+    public SearchResult search(@RequestParam("text") String text)
     {
         return this.sparkService.search(text);
     }
+
+    @RequestMapping(value = "/searchGrouped", method = RequestMethod.GET)
+    public List<Tuple2<String,Iterable<Document>>> searchGrouped(@RequestParam("text") String text)
+    {
+        return this.sparkService.searchGroupByDate(text);
+    }
+
+
 }
