@@ -7,7 +7,8 @@
 		'toastr',
         'ngSanitize',
 		'dx',
-		'ngMessages'
+		'ngMessages',
+		'blockUI'
 	]);
 	
 })();

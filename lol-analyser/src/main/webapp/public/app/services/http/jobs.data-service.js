@@ -17,15 +17,18 @@ var App;
             "use strict";
             var JobsDataService = (function (_super) {
                 __extends(JobsDataService, _super);
-                function JobsDataService($http, $q) {
-                    return _super.call(this, 'jobs', $http, $q) || this;
+                function JobsDataService($http, $q, blockUI) {
+                    return _super.call(this, 'jobs', $http, $q, blockUI) || this;
                 }
                 JobsDataService.prototype.search = function (text) {
                     return _super.prototype.get.call(this, "search", "?text=" + text);
                 };
+                JobsDataService.prototype.searchGrouped = function (text) {
+                    return _super.prototype.get.call(this, "searchGrouped", "?text=" + text);
+                };
                 return JobsDataService;
             }(Http.Base.HttpService));
-            JobsDataService.$inject = ['$http', '$q'];
+            JobsDataService.$inject = ['$http', '$q', 'blockUI'];
             Http.JobsDataService = JobsDataService;
             angular.module(App.Config.MODULE_NAME).service('JobsDataService', JobsDataService);
         })(Http = Services.Http || (Services.Http = {}));

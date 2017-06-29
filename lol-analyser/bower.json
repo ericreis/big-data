@@ -38,6 +38,7 @@
     "admin-lte": "^2.3.8",
     "devextreme": "17.1.3",
     "bootstrap-datepicker": "^1.6.4",
-    "moment": "^2.16.0"
+    "moment": "^2.16.0",
+    "angular-block-ui": "^0.2.2"
   }
 }

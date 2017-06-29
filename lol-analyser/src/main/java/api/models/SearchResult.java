@@ -2,13 +2,14 @@ package api.models;
 
 import org.bson.Document;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by erikeft on 30/05/17.
  */
-public class SearchResult {
-
+public class SearchResult implements Serializable
+{
     private long count;
 
     private List<Document> data;

@@ -6,7 +6,8 @@
         'toastr',
         'ngSanitize',
         'dx',
-        'ngMessages'
+        'ngMessages',
+        'blockUI'
     ]);
 })();
 //# sourceMappingURL=app.module.js.map

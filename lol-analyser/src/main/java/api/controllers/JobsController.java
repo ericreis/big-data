@@ -50,7 +50,7 @@ public class JobsController
     }
 
     @RequestMapping(value = "/searchGrouped", method = RequestMethod.GET)
-    public List<Tuple2<String,Iterable<Document>>> searchGrouped(@RequestParam("text") String text)
+    public List<Tuple2<String,SearchResult>> searchGrouped(@RequestParam("text") String text)
     {
         return this.sparkService.searchGroupByDate(text);
     }

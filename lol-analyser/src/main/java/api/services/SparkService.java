@@ -3,6 +3,7 @@ package api.services;
 import api.models.SearchResult;
 import com.mongodb.spark.MongoSpark;
 import com.mongodb.spark.rdd.api.java.JavaMongoRDD;
+import jersey.repackaged.com.google.common.collect.Lists;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -31,10 +32,12 @@ public class SparkService
          * parse args for the values to set.
          */
         SparkSession spark = SparkSession.builder()
-                .master("local")
+                .master("local[*]")
                 .appName("MongoSparkConnectorIntro")
-                .config("spark.mongodb.input.uri", "mongodb://ec2-52-72-161-42.compute-1.amazonaws.com/msi_crawler.msi_sp")
-                .config("spark.mongodb.output.uri", "mongodb://ec2-52-72-161-42.compute-1.amazonaws.com/msi_crawler.msi_sp")
+//                .config("spark.mongodb.input.uri", "mongodb://ec2-52-72-161-42.compute-1.amazonaws.com/msi_crawler.msi_sp")
+//                .config("spark.mongodb.output.uri", "mongodb://ec2-52-72-161-42.compute-1.amazonaws.com/msi_crawler.msi_sp")
+                .config("spark.mongodb.input.uri", "mongodb://10.20.43.127/msi_crawler.msi_sp")
+                .config("spark.mongodb.output.uri", "mongodb://10.20.43.127/msi_crawler.msi_sp")
                 .getOrCreate();
 
         // Create a JavaSparkContext using the SparkSession's SparkContext object
@@ -67,16 +70,24 @@ public class SparkService
         return result;
     }
 
-    public List<Tuple2<String,Iterable<Document>>> searchGroupByDate(String text)
+    public List<Tuple2<String,SearchResult>> searchGroupByDate(String text)
     {
         JavaMongoRDD<Document> rdd = MongoSpark.load(jsc);
-        JavaRDD<Document> filteredRdd = rdd.filter((Function<Document, Boolean>) document -> document.get("text").toString().toLowerCase().contains(text));
+        JavaPairRDD<String, SearchResult> resultRdd = rdd
+                .filter((Function<Document, Boolean>) document ->
+                    document.get("text").toString().toLowerCase().contains(text))
+                .groupBy((Function<Document, String>) document -> {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    return dateFormat.format((Date)document.get("date"));
+                })
+                .mapValues((Function<Iterable<Document>, SearchResult>) documents -> {
+                    List<Document> docs = Lists.newArrayList(documents);
+                    SearchResult result = new SearchResult();
+                    result.setData(docs);
+                    result.setCount(docs.size());
+                    return result;
+                });
 
-        JavaPairRDD<String, Iterable<Document>> groupedRdd = filteredRdd.groupBy((Function<Document, String>) document -> {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            return dateFormat.format((Date)document.get("date"));
-        });
-
-        return groupedRdd.collect();
+        return resultRdd.collect();
     }
 }
