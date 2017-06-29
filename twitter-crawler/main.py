@@ -11,9 +11,12 @@ import json
 
 # Parsing command-line args
 parser = argparse.ArgumentParser(description='Tweet crawler')
+parser.add_argument('-db', action="store", dest="db", help="mongo db name", required=True)
+parser.add_argument('-collection', action="store", dest="collection", help="mongo collection name", required=True)
 parser.add_argument('-nort', action="store_true", dest="nort", default=False, help='disable retweets')
 parser.add_argument('-htags', action="store", dest="htags", nargs='*', help='hashtags to query', required=True)
 parser.add_argument('-c', action="store", dest="count", type=int, help='tweets count to query', required=True)
+parser.add_argument('-sinceid', action="store", dest="sinceid", help='tweets count to query')
 args = parser.parse_args()
 
 
@@ -29,10 +32,9 @@ t = Twython(app_key=TWITTER_API_KEY,
             oauth_token=TWITTER_ACCESS_TOKEN, 
             oauth_token_secret=TWITTER_ACCESS_TOKEN_SECRET)
 
-
-mongoCLient = MongoClient('mongodb://localhost:27017/')
-db = mongoCLient['msi_crawler']
-collection = db['msi_sp']
+mongoCLient = MongoClient('mongodb://10.20.43.127:27017/')
+db = mongoCLient[args.db]
+collection = db[args.collection]
 
 # Creating query from command-line args
 query = ""
@@ -45,11 +47,9 @@ for htag in args.htags:
 if args.nort:
     query += "-filter:retweets"
 
-print 'query:', query
+#print 'query:', query
 
-with open('since_id.dat', 'r') as f_read:
-    since_id = f_read.readline()
-
+since_id = args.sinceid
 # Searching
 if (since_id == ''):
     search = t.search(q=query, count=args.count)
@@ -75,8 +75,8 @@ for tweet in tweets:
     if tweet_doc['tweet_id'] > since_id:
         since_id = tweet_doc['tweet_id']
 
-collection.insert_many(tweet_docs)
-print 'Found {0} new tweets'.format(len(tweet_docs))
+if (len(tweet_docs) > 0):
+    collection.insert_many(tweet_docs)
+#print 'Found {0} new tweets'.format(len(tweet_docs))
 
-with open('since_id.dat', 'w') as f_write:
-    f_write.write(since_id)
+print since_id

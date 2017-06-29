@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.Arrays;
 
@@ -12,6 +13,7 @@ import java.util.Arrays;
  * Created by ericreis on 5/25/17.
  */
 @SpringBootApplication
+@EnableScheduling
 public class Application
 {
     public static void main(String[] args)
